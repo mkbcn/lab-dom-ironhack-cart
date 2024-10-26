@@ -1,67 +1,56 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700&display=swap');
+// ITERATION 1
 
-body {
-  margin: 0 auto;
-  padding: 1em;
-  max-width: 60em;
-  font-family: 'Roboto Mono', sans-serif;
-  line-height: 1.5;
-  color: #2d354c;
+function updateSubtotal(product) {
+ // console.log('Calculating subtotal, yey!');
+  const price = product.querySelector('.price span').innerText;
+  const quantityElement = product.querySelector(".quantity input").value;
+
+  const subTotalElement = parseInt(price) * quantityElement;
+ 
+  product.querySelector(".subtotal span").innerText = subTotalElement;
+
+  return subTotalElement;
+
 }
 
-button,
-input {
-  font: inherit;
-  color: inherit;
+function calculateAll() {
+  // code in the following two lines is added just for testing purposes.
+  // it runs when only iteration 1 is completed. at later point, it can be removed.
+ // const singleProduct = document.querySelector('.product');
+ // updateSubtotal(singleProduct);
+  // end of test
+
+  // ITERATION 2
+  const productTr = document.querySelectorAll('.product');
+  let totalSum = 0;
+  productTr.forEach(product => {
+    updateSubtotal(product);
+    totalSum += updateSubtotal(product);
+  });
+
+
+  // ITERATION 3
+  document.querySelector("#total-value span").innerText = totalSum;
 }
 
-th,
-td,
-button,
-input {
-  padding: 0.75em 1em;
+// ITERATION 4
+
+function removeProduct(event) {
+  const target = event.currentTarget;
+  console.log('The target in remove is:', target);
+  //... your code goes here
 }
 
-table#cart {
-  width: 100%;
-  border-collapse: collapse;
+// ITERATION 5
+
+function createProduct() {
+  //... your code goes here
 }
 
-table#cart tfoot {
-  background: #eee;
-}
 
-table#cart td,
-table input {
-  border: 1px solid #dadada;
-}
+window.addEventListener('load', () => {
+  const calculatePricesBtn = document.getElementById('calculate');
+  calculatePricesBtn.addEventListener('click', calculateAll);
 
-table input[type='number'] {
-  max-width: 4em;
-}
-
-.btn {
-  display: inline-block;
-  border: 0;
-  border-radius: 0.25em;
-  cursor: pointer;
-}
-
-.btn-success,
-.btn-remove {
-  color: #fff;
-}
-
-.btn-success {
-  background-color: #2cc5fa;
-}
-
-.btn-remove {
-  background-color: #f27471;
-}
-
-h1,
-h2,
-.calculate-total {
-  text-align: center;
-}
+  //... your code goes here
+});
